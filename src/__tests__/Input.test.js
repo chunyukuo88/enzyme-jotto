@@ -33,7 +33,7 @@ describe('Input.js', ()=>{
    describe('When there is a change in the input, ', ()=>{
       test('the setState function is invoked.', ()=>{
           const mockSetCurrentGuess = jest.fn();
-          React.useState = jest.fn(() => ["", mockSetCurrentGuess]); // Redefining useState as a jest mock.
+          React.useState = jest.fn(() => ['', mockSetCurrentGuess]);
 
           const wrapper = setup();
           const inputBox = findByTestAttr(wrapper, 'input-box');
@@ -44,4 +44,16 @@ describe('Input.js', ()=>{
           expect(mockSetCurrentGuess).toHaveBeenCalledWith('train');
       });
    });
+    describe('When I click the submit button, ', ()=>{
+        test('the guess is cleared.', ()=>{
+            React.useState = jest.fn(() => ['train', mockSetCurrentGuess]);
+            const mockSetCurrentGuess = jest.fn();
+
+            const wrapper = setup();
+            const button =  findByTestAttr(wrapper, 'submit-button');
+
+            button.simulate('click', { preventDefault() {} });
+            expect(mockSetCurrentGuess).toHaveBeenCalledWith('');
+        });
+    });
 });

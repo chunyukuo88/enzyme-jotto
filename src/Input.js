@@ -18,8 +18,12 @@ export default function Input({secretWord}){
                 <button
                     data-test="submit-button"
                     className="btn btn-primary mb-2"
-                    Submit
-                ></button>
+                    onClick={(event) => {
+                        //TODO: update guessedWords list.
+                        //TODO: Check against the secretWord, update `success` context.
+                        event.preventDefault()
+                        setCurrentGuess('')}}
+                >Submit Guess</button>
             </form>
         </div>
     );
